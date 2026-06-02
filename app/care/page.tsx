@@ -1,41 +1,66 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { careGuideSections } from "@/data/products";
 
 export const metadata: Metadata = {
   title: "Hair Piece Care Guide",
-  description: "Plain-English care guidance for men’s hair pieces, including colour checks, cutting, bonding, washing, and storage."
+  description: "Plain-English care guidance for men's hair pieces, including inspection, washing, bonding, storage, styling, and barber cut-in advice."
 };
-
-const steps = [
-  ["Check before altering", "Inspect colour, density, base size, wave, and front contour in daylight before cutting, trimming, or bonding."],
-  ["Use the right attachment", "Thin skin is usually easier with tape or liquid adhesive. Lace needs careful cleanup and lace-safe products."],
-  ["Do not over-wash", "Wash when needed with gentle products. Over-washing can shorten the wear cycle and dry the hair."],
-  ["Protect the hair", "Use light conditioning, avoid excessive heat, and detangle gently from ends upward."],
-  ["Store correctly", "Keep spare pieces dry, ventilated, and away from direct sunlight or damp bathrooms."],
-  ["Use a capable barber", "Any cut-in should be performed by someone confident with hair systems. Take your time with the first cut."],
-];
 
 export default function CarePage() {
   return (
     <section className="page-section container">
-      <div className="page-heading">
+      <div className="page-heading left">
         <span className="eyebrow">Care guide</span>
-        <h1>Make the hair piece last longer and look more natural.</h1>
-        <p>This page gives buyers confidence after checkout without turning the store into a fitting service.</p>
+        <h1>Keep the unit looking natural for longer.</h1>
+        <p>
+          Product-first does not mean leaving buyers in the dark. Use this guide for inspection, washing,
+          attachment, storage, styling, and barber handoff.
+        </p>
       </div>
-      <div className="care-grid">
-        {steps.map(([title, body], index) => (
-          <article className="care-card" key={title}>
+
+      <div className="care-grid expanded-care-grid">
+        {careGuideSections.map((item, index) => (
+          <article className="care-card" key={item.title}>
             <span>{String(index + 1).padStart(2, "0")}</span>
-            <h2>{title}</h2>
-            <p>{body}</p>
+            <h2>{item.title}</h2>
+            <p>{item.body}</p>
           </article>
         ))}
       </div>
-      <div className="info-box detail-section">
-        <h2>Important return note</h2>
-        <p>Hair pieces should be checked before alteration. Once cut, bleached, coloured, bonded, or exposed to adhesive, the product may no longer be returnable.</p>
-        <Link href="/shop" className="button button-secondary">Shop hair pieces</Link>
+
+      <div className="confidence-grid">
+        <article className="info-card">
+          <h3>Before you alter it</h3>
+          <p>Inspect colour, density, base size, and contour in daylight before any cutting or adhesive touches the unit.</p>
+        </article>
+        <article className="info-card">
+          <h3>Heat damage is real</h3>
+          <p>Too much heat dries the hair and shortens lifespan quickly, especially on finer or lighter-density pieces.</p>
+        </article>
+        <article className="info-card">
+          <h3>Barber cut-ins matter</h3>
+          <p>You do not need a salon package, but you do need someone confident enough to trim and blend the piece properly.</p>
+        </article>
+        <article className="info-card">
+          <h3>Storage changes longevity</h3>
+          <p>Keep spare units dry, ventilated, and away from humidity or direct sun if you want them to stay usable.</p>
+        </article>
+      </div>
+
+      <div className="cta-section compact">
+        <div>
+          <h2>Need help choosing before you buy?</h2>
+          <p>The guide works best when you pair it with the right base and maintenance expectations from the start.</p>
+        </div>
+        <div className="hero-actions">
+          <Link href="/compare" className="button button-secondary">
+            Compare bases
+          </Link>
+          <Link href="/shop" className="button">
+            Shop hair pieces
+          </Link>
+        </div>
       </div>
     </section>
   );
